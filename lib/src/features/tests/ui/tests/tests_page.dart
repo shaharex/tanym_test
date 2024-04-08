@@ -1,38 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:tanymtest_app/src/core/common/common_app_bar.dart';
 import 'package:tanymtest_app/src/core/common/common_text.dart';
 import 'package:tanymtest_app/src/core/common/common_title.dart';
 import 'package:tanymtest_app/src/core/constants/app_colors.dart';
-import 'package:tanymtest_app/src/features/onboarding/onboarding_page.dart';
 import 'package:tanymtest_app/src/features/tests/ui/mood/mood_page.dart';
-import 'package:tanymtest_app/src/services/auth_service/auth_service.dart';
 
 class TestsPage extends StatelessWidget {
   const TestsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    //sign out function
-    void signOut() {
-      final authService = Provider.of<AuthService>(context, listen: false);
-      authService.signOut().then((_) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => OnboardingPage()),
-        );
-      }).catchError((error) {
-        print('Error signing out: $error');
-      });
-    }
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.background_color,
-        appBar: CommonAppBar(
+        appBar: const CommonAppBar(
           title: 'Тесты',
-          icon: Icon(Icons.logout_outlined),
-          onTap: signOut,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -70,6 +52,7 @@ class TestsPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           const CommonTitle(
@@ -111,7 +94,7 @@ class TestsPage extends StatelessWidget {
                                   ),
                                   const SizedBox(width: 5),
                                   const CommonText(
-                                    text: '72 вопросов',
+                                    text: '74 вопроса',
                                     size: 13,
                                     color: AppColors.dark_grey_color,
                                     fontWeight: FontWeight.bold,

@@ -4,7 +4,7 @@ import 'package:tanymtest_app/src/core/common/common_text.dart';
 import 'package:tanymtest_app/src/core/common/common_title.dart';
 import 'package:tanymtest_app/src/core/constants/app_colors.dart';
 import 'package:tanymtest_app/src/features/onboarding/data/onboarding_data.dart';
-import 'package:tanymtest_app/src/features/welcome_screen/welcome_page.dart';
+import 'package:tanymtest_app/src/features/onboarding/welcome_screen/welcome_page.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -21,6 +21,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.white_color,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -77,7 +78,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                     if (currentIndex != data.items.length - 1) {
                       currentIndex++;
                     } else {
-                      Navigator.of(context).pushReplacement(
+                      Navigator.of(context).push(
                         MaterialPageRoute(
                             builder: (context) => const WelcomePage()),
                       );

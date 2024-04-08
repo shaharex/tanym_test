@@ -132,7 +132,7 @@ class QuizProvider extends ChangeNotifier {
   void setSelectedEmotion(String emotion) {
     if (!selectedEmotions.contains(emotion)) {
       selectedEmotions.add(emotion);
-      print(selectedEmotions);
+      print('Selected emotions: $selectedEmotions');
       notifyListeners();
     }
   }
@@ -143,7 +143,7 @@ class QuizProvider extends ChangeNotifier {
   void nextQuestion() {
     if (currentIndex < questions.length - 1) {
       currentIndex++;
-      if ((currentIndex + 1) % 10 == 0) {
+      if ((currentIndex + 1) % 25 == 0) {
         if (currentIndex != questions.length - 1) {
           Navigator.push(
               context,
@@ -171,15 +171,8 @@ class QuizProvider extends ChangeNotifier {
     }
   }
 
-  void previousQuestion() {
-    if (currentIndex > 0) {
-      currentIndex--;
-      notifyListeners();
-    }
-  }
-
   void submitTest() {
-    testSubmitted = true;
+    //testSubmitted = true;
     print(selectedEmotions);
     Navigator.push(
       context,

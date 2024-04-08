@@ -8,6 +8,8 @@ class CommonButton extends StatelessWidget {
   final Color background_color;
   final Color text_color;
   final double pad_size;
+  final double? fntSize;
+  final FontWeight? fntWeight;
 
   const CommonButton({
     super.key,
@@ -17,6 +19,8 @@ class CommonButton extends StatelessWidget {
     this.background_color = AppColors.primary_color,
     this.text_color = AppColors.white_color,
     this.pad_size = 20,
+    this.fntSize,
+    this.fntWeight = FontWeight.bold,
   });
 
   @override
@@ -38,8 +42,9 @@ class CommonButton extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
+              fontSize: fntSize,
               color: text_color,
-              fontWeight: FontWeight.bold,
+              fontWeight: fntWeight,
             ),
           ),
         ),

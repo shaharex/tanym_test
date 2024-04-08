@@ -33,8 +33,8 @@ class ProgressDotWidget extends StatelessWidget {
     }
 
     return Container(
-      width: 45,
-      height: 45,
+      width: 30,
+      height: 30,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: background_color,
@@ -44,7 +44,7 @@ class ProgressDotWidget extends StatelessWidget {
         child: Text(
           (index).toString(),
           style: TextStyle(
-            fontSize: 18,
+            fontSize: 15,
             color: text_color,
             fontWeight: FontWeight.bold,
           ),

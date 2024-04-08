@@ -65,53 +65,61 @@ class _MoodPageState extends State<MoodPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: AppColors.white_color,
+      appBar: AppBar(
         backgroundColor: AppColors.white_color,
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                const SizedBox(height: 20),
-                const Center(
-                  child: CommonTitle(
-                    text: 'Как вы себя чувствуете?',
-                    size: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Center(
-                  child: Image.asset(
-                    'assets/images/mood_page.png',
-                    height: 302,
-                  ),
-                ),
-                Center(
-                  child: Wrap(
-                    alignment: WrapAlignment.center,
-                    spacing: 6.0,
-                    runSpacing: 4.0,
-                    children: _buildFilterChips(
-                        Provider.of<QuizProvider>(context), context),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: CommonButton(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const QuizPage()));
-                    },
-                    text: 'Готово',
-                  ),
-                ),
-              ],
-            ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: AppColors.primary_color,
+            size: 32,
           ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            const Center(
+              child: CommonTitle(
+                text: 'Как вы себя чувствуете?',
+                size: 32,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Center(
+              child: Image.asset(
+                'assets/images/mood_page.png',
+                height: 302,
+              ),
+            ),
+            Center(
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 6.0,
+                runSpacing: 4.0,
+                children: _buildFilterChips(
+                    Provider.of<QuizProvider>(context), context),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: CommonButton(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const QuizPage()));
+                },
+                text: 'Готово',
+              ),
+            ),
+          ],
         ),
       ),
     );

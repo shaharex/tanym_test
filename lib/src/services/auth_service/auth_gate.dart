@@ -13,28 +13,14 @@ class AuthGate extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            // Возвращаем загрузочный индикатор, если состояние еще загружается
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           } else if (snapshot.hasData) {
-            // Возвращаем главную страницу при наличии данных (пользователь вошел в систему)
-            return BottomNavBar();
+            return const BottomNavBar();
           } else {
-            // Возвращаем страницу OnboardingPage, если пользователь вышел из системы
-            return OnboardingPage();
+            return const OnboardingPage();
           }
         },
       ),
-      // body: StreamBuilder(
-      //   stream: FirebaseAuth.instance.authStateChanges(),
-      //   builder: (context, snapshot) {
-      //     if (snapshot.hasData) {
-      //       return const BottomNavBar();
-      //       //return const NavigationMenu();
-      //     } else {
-      //       return const OnboardingPage();
-      //     }
-      //   },
-      // ),
     );
   }
 }
