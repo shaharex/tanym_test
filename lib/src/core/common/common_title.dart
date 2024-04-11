@@ -26,7 +26,6 @@ class CommonTitle extends StatelessWidget {
       style: TextStyle(
         color: color,
         fontSize: size,
-        // fontFamily: 'Nunito',
         fontWeight: fontWeight,
       ),
       textAlign: text_align,

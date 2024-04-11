@@ -49,7 +49,11 @@ class _MoodPageState extends State<MoodPage> {
         onSelected: (bool value) {
           setState(() {
             isSelectedList[index] = value;
-            quizProvider.setSelectedEmotion(emotion);
+            if (value) {
+              quizProvider.setSelectedEmotion(emotion);
+            } else {
+              quizProvider.removeSelectedEmotion(emotion);
+            }
           });
         },
         shape: RoundedRectangleBorder(
@@ -65,6 +69,7 @@ class _MoodPageState extends State<MoodPage> {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<QuizProvider>(context);
     return Scaffold(
       backgroundColor: AppColors.white_color,
       appBar: AppBar(
@@ -103,14 +108,14 @@ class _MoodPageState extends State<MoodPage> {
                 alignment: WrapAlignment.center,
                 spacing: 6.0,
                 runSpacing: 4.0,
-                children: _buildFilterChips(
-                    Provider.of<QuizProvider>(context), context),
+                children: _buildFilterChips(provider, context),
               ),
             ),
             Align(
               alignment: Alignment.bottomCenter,
               child: CommonButton(
                 onTap: () {
+                  provider.saveEmotionList();
                   Navigator.push(
                       context,
                       MaterialPageRoute(

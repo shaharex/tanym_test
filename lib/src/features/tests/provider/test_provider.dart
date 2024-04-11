@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tanymtest_app/src/features/tests/components/animation/animation_page.dart';
 import 'package:tanymtest_app/src/features/tests/components/animation/data/animation_data.dart';
@@ -8,14 +10,6 @@ class QuizProvider extends ChangeNotifier {
   BuildContext context;
 
   QuizProvider(this.context);
-
-  int counter1 = 0;
-  int counter2 = 0;
-  int counter3 = 0;
-  int counter4 = 0;
-
-  List<String> selectedEmotions = [];
-
   final List<Question> questions = [
     Question('Д',
         "Я часто легко отвлекаюсь от дела, становлюсь рассеянным и мечтательным"),
@@ -109,12 +103,25 @@ class QuizProvider extends ChangeNotifier {
         "У меня бывают периоды, когда меня сильно раздражают яркий свет, яркие краски, сильный шум, хотя на других людей это так не действует"),
     Question('И', "У меня есть плохие привычки"),
   ];
-
+  int counter1 = 0;
+  int counter2 = 0;
+  int counter3 = 0;
+  int counter4 = 0;
+  final animation_data = AnimationData();
+  int animation_index = 0;
   int currentIndex = 0;
-
+  List<String> selectedEmotions = [];
   bool testSubmitted = false;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
-  final Map<int, String> selectedAnswers = {};
+  Future<String> getUserId() async {
+    User? user = _firebaseAuth.currentUser;
+    if (user != null) {
+      return user.uid;
+    }
+    throw Exception('No user logged in');
+  }
 
   void answerQuestion(String value) {
     if (questions[currentIndex].shkala == "И" && value == "Yes") {
@@ -132,13 +139,44 @@ class QuizProvider extends ChangeNotifier {
   void setSelectedEmotion(String emotion) {
     if (!selectedEmotions.contains(emotion)) {
       selectedEmotions.add(emotion);
-      print('Selected emotions: $selectedEmotions');
+      updateEmotionsInFirestore();
       notifyListeners();
+      saveEmotionList();
     }
   }
 
-  final animation_data = AnimationData();
-  int animation_index = 0;
+  void removeSelectedEmotion(String emotion) {
+    selectedEmotions.remove(emotion);
+    updateEmotionsInFirestore();
+    notifyListeners();
+    saveEmotionList();
+  }
+
+  List<String> _listOfEmotions = [];
+  void updateEmotionsInFirestore() {
+    _listOfEmotions = selectedEmotions;
+  }
+
+  void saveEmotionList() async {
+    try {
+      String userId = await getUserId();
+      CollectionReference emotionList =
+          _fireStore.collection('users').doc(userId).collection('result');
+      var existingData = await emotionList.limit(1).get();
+      if (existingData.docs.isNotEmpty) {
+        var docId = existingData.docs.first.id;
+        await emotionList.doc(docId).set({
+          'list_of_emotions': _listOfEmotions,
+        }, SetOptions(merge: true));
+      } else {
+        await emotionList.add({
+          'list_of_emotions': _listOfEmotions,
+        });
+      }
+    } catch (e) {
+      print('Error submitting test: $e');
+    }
+  }
 
   void nextQuestion() {
     if (currentIndex < questions.length - 1) {
@@ -171,20 +209,53 @@ class QuizProvider extends ChangeNotifier {
     }
   }
 
-  void submitTest() {
-    //testSubmitted = true;
-    print(selectedEmotions);
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => TestResultPage(
-          counter1: counter1,
-          counter2: counter2,
-          counter3: counter3,
-          counter4: counter4,
-          emotions_list: selectedEmotions,
+  void submitTest() async {
+    try {
+      String userId = await getUserId();
+      testSubmitted = true;
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => TestResultPage(
+            counter1: counter1,
+            counter2: counter2,
+            counter3: counter3,
+            counter4: counter4,
+          ),
         ),
-      ),
-    );
+      );
+
+      CollectionReference resultList =
+          _fireStore.collection('users').doc(userId).collection('result');
+      var existingData = await resultList.limit(1).get();
+
+      DateTime now = DateTime.now();
+      String formattedDate =
+          "${now.day.toString().padLeft(2, '0')}.${now.month.toString().padLeft(2, '0')}.${now.year}";
+
+      if (existingData.docs.isNotEmpty) {
+        var docId = existingData.docs.first.id;
+        await resultList.doc(docId).set({
+          'name_of_test': 'Личный опросник ИСН',
+          'data': formattedDate,
+          'depression': counter1,
+          'neuroticism': counter2,
+          'sincerity': counter3,
+          'sociability': counter4,
+        }, SetOptions(merge: true));
+      } else {
+        await resultList.add({
+          'name_of_test': 'Личный опросник ИСН',
+          'data': formattedDate,
+          'depression': counter1,
+          'neuroticism': counter2,
+          'sincerity': counter3,
+          'sociability': counter4,
+        });
+      }
+    } catch (e) {
+      print('Error submitting test: $e');
+    }
   }
 }

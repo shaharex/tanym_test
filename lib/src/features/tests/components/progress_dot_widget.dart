@@ -36,8 +36,9 @@ class ProgressDotWidget extends StatelessWidget {
       width: 30,
       height: 30,
       decoration: BoxDecoration(
-        shape: BoxShape.circle,
+        shape: BoxShape.rectangle,
         color: background_color,
+        borderRadius: BorderRadius.circular(5),
         border: Border.all(color: border_color, width: 2),
       ),
       child: Center(

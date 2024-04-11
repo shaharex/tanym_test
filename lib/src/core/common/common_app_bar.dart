@@ -27,24 +27,30 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       // Если boolean равен false, добавляем иконку слева
       if (boolean == false) {
         children.add(
-          IconButton(
-            onPressed: onTap,
-            icon: icon!,
-            iconSize: 32,
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: IconButton(
+              onPressed: onTap,
+              icon: icon!,
+              iconSize: 32,
+            ),
           ),
         );
       }
 
       children.add(
         Expanded(
-          child: Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 24,
-              color: text_color,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20.0),
+            child: Text(
+              title,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 24,
+                color: text_color,
+              ),
+              textAlign: TextAlign.start,
             ),
-            //textAlign: TextAlign.center,
           ),
         ),
       );
@@ -63,14 +69,17 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
         Expanded(
           child: Align(
             alignment: Alignment.bottomCenter,
-            child: Text(
-              title,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: 24,
-                color: text_color,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 15.0),
+              child: Text(
+                title,
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24,
+                  color: text_color,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
           ),
         ),

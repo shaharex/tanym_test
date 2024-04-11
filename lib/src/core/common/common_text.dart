@@ -29,7 +29,7 @@ class CommonText extends StatelessWidget {
         color: color,
         fontSize: size,
         //fontFamily: 'Nunito',
-        // overflow: TextOverflow.ellipsis,
+        overflow: TextOverflow.ellipsis,
         fontWeight: fontWeight,
       ),
       maxLines: maxLines,

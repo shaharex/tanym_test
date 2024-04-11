@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color primary_color = Color.fromARGB(255, 80, 175, 137);
+  static const Color bg_for_circle = Color.fromARGB(205, 221, 248, 227);
   static const Color low_primary_color = Color.fromARGB(255, 135, 158, 164);
   static const Color black_color = Colors.black;
   static const Color light_primary_color = Color.fromARGB(255, 233, 243, 233);
