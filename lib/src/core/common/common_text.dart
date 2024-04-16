@@ -18,7 +18,7 @@ class CommonText extends StatelessWidget {
     this.textStyle,
     this.text_align = TextAlign.center,
     this.size = 17.0,
-    this.maxLines,
+    this.maxLines = 4,
   });
 
   @override

@@ -34,13 +34,46 @@ class _HistoryPageState extends State<HistoryPage> {
       future: _getResultData(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+              child: CircularProgressIndicator(
+            color: AppColors.primary_color,
+          ));
         }
         if (snapshot.hasError) {
           return Center(child: Text('Ошибка: ${snapshot.error}'));
         }
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No results found'));
+          return SafeArea(
+            child: Scaffold(
+              backgroundColor: AppColors.background_color,
+              appBar: const CommonAppBar(title: 'История'),
+              body: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Opacity(
+                      opacity: 0.8,
+                      child: Image.asset(
+                        'assets/images/empty.png',
+                        width: 200,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 40.0),
+                      child: CommonText(
+                        color: AppColors.grey_color,
+                        text:
+                            'История пройденных тестов недоступна, так как вы еще не прошли ни один из них.',
+                        text_align: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
         }
         var results = snapshot.data!;
         return Scaffold(
@@ -61,46 +94,23 @@ class _HistoryPageState extends State<HistoryPage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            CommonTitle(text: resultData['name_of_test']),
-                            CommonText(
-                              text: 'сдано ${resultData['data']}',
-                              size: 15,
-                              fontWeight: FontWeight.w400,
-                            ),
-                            CommonCustomBtn(
-                              vert: 6,
-                              hor: 30,
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => HistoryResultPage(
-                                      title_appBar: resultData['name_of_test'],
-                                      counter1: resultData['depression'],
-                                      counter2: resultData['neuroticism'],
-                                      counter3: resultData['sincerity'],
-                                      counter4: resultData['sociability'],
-                                      list_of_emotions:
-                                          resultData['list_of_emotions'],
-                                    ),
-                                  ),
-                                );
-                              },
-                              text: 'Посмотреть результат',
-                            ),
-                          ],
-                        ),
-                        CommonCircle(
-                          size: 55,
-                          boxsh: false,
-                          child: IconButton(
-                            onPressed: () {
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CommonTitle(
+                              text: resultData['name_of_test'].toString()),
+                          CommonText(
+                            text: 'сдано ${resultData['data']}',
+                            size: 15,
+                            fontWeight: FontWeight.w400,
+                          ),
+                          CommonCustomBtn(
+                            vert: 6,
+                            hor: 30,
+                            onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -116,14 +126,39 @@ class _HistoryPageState extends State<HistoryPage> {
                                 ),
                               );
                             },
-                            icon: const Icon(
-                              Icons.play_arrow,
-                              color: AppColors.primary_color,
-                              size: 38,
-                            ),
+                            text: 'Посмотреть результат',
+                          ),
+                        ],
+                      ),
+                      CommonCircle(
+                        size: 55,
+                        boxsh: false,
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HistoryResultPage(
+                                  title_appBar: resultData['name_of_test'],
+                                  counter1: resultData['depression'],
+                                  counter2: resultData['neuroticism'],
+                                  counter3: resultData['sincerity'],
+                                  counter4: resultData['sociability'],
+                                  list_of_emotions:
+                                      resultData['list_of_emotions'],
+                                ),
+                              ),
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.play_arrow,
+                            color: AppColors.primary_color,
+                            size: 38,
                           ),
                         ),
-                      ]),
+                      ),
+                    ],
+                  ),
                 );
               },
             ),

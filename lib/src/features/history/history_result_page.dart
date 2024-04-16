@@ -59,148 +59,150 @@ class HistoryResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CommonAppBar(
-        icon: const Icon(
-          Icons.arrow_back_ios_new_rounded,
-          color: AppColors.white_color,
+    return SafeArea(
+      child: Scaffold(
+        appBar: CommonAppBar(
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            color: AppColors.white_color,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
+          title: 'Результаты теста',
         ),
-        onTap: () {
-          Navigator.pop(context);
-        },
-        title: 'Результаты теста',
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(20.0),
-              height: 300,
-              width: double.maxFinite,
-              decoration: BoxDecoration(
-                color: AppColors.white_color,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CommonTitle(text: '$title_appBar'),
-                  const SizedBox(height: 20),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const SizedBox(
-                                width: 140,
-                                child: CommonText(
-                                  text: 'Искренность',
-                                  text_align: TextAlign.start,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(20.0),
+                height: 300,
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  color: AppColors.white_color,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CommonTitle(text: '$title_appBar'),
+                    const SizedBox(height: 20),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const SizedBox(
+                                  width: 140,
+                                  child: CommonText(
+                                    text: 'Искренность',
+                                    text_align: TextAlign.start,
+                                  ),
                                 ),
-                              ),
-                              CommonText(
-                                text: '$counter1/74',
-                                color: AppColors.dark_grey_color,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
-                          const Divider(color: AppColors.light_grey_color),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const SizedBox(
-                                width: 140,
-                                child: CommonText(
-                                  text: 'Депрессивность',
-                                  text_align: TextAlign.start,
+                                CommonText(
+                                  text: '$counter1/74',
+                                  color: AppColors.dark_grey_color,
                                 ),
-                              ),
-                              CommonText(
-                                text: '$counter2/74',
-                                color: AppColors.dark_grey_color,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
-                          const Divider(color: AppColors.light_grey_color),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const SizedBox(
-                                width: 140,
-                                child: CommonText(
-                                  text: 'Невротизации',
-                                  text_align: TextAlign.start,
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            const Divider(color: AppColors.light_grey_color),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const SizedBox(
+                                  width: 140,
+                                  child: CommonText(
+                                    text: 'Депрессивность',
+                                    text_align: TextAlign.start,
+                                  ),
                                 ),
-                              ),
-                              CommonText(
-                                text: '$counter3/74',
-                                color: AppColors.dark_grey_color,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
-                          const Divider(color: AppColors.light_grey_color),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const SizedBox(
-                                width: 140,
-                                child: CommonText(
-                                  text: 'Общительность',
-                                  text_align: TextAlign.start,
+                                CommonText(
+                                  text: '$counter2/74',
+                                  color: AppColors.dark_grey_color,
                                 ),
-                              ),
-                              CommonText(
-                                text: '$counter4/74',
-                                color: AppColors.dark_grey_color,
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 10),
-                          const Divider(color: AppColors.light_grey_color),
-                        ],
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            const Divider(color: AppColors.light_grey_color),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const SizedBox(
+                                  width: 140,
+                                  child: CommonText(
+                                    text: 'Невротизации',
+                                    text_align: TextAlign.start,
+                                  ),
+                                ),
+                                CommonText(
+                                  text: '$counter3/74',
+                                  color: AppColors.dark_grey_color,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            const Divider(color: AppColors.light_grey_color),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const SizedBox(
+                                  width: 140,
+                                  child: CommonText(
+                                    text: 'Общительность',
+                                    text_align: TextAlign.start,
+                                  ),
+                                ),
+                                CommonText(
+                                  text: '$counter4/74',
+                                  color: AppColors.dark_grey_color,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 10),
+                            const Divider(color: AppColors.light_grey_color),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(20.0),
-              height: 220,
-              width: double.maxFinite,
-              decoration: BoxDecoration(
-                color: AppColors.white_color,
-                borderRadius: BorderRadius.circular(10),
+              Container(
+                padding: const EdgeInsets.all(20.0),
+                height: 220,
+                width: double.maxFinite,
+                decoration: BoxDecoration(
+                  color: AppColors.white_color,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const CommonTitle(
+                      text: 'Ваше самочуствие во время прохождения теста',
+                      text_align: TextAlign.start,
+                    ),
+                    const SizedBox(height: 20),
+                    CommonText(
+                      text: list_of_emotions.join(', '),
+                    ),
+                  ],
+                ),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const CommonTitle(
-                    text: 'Ваше самочуствие во время прохождения теста',
-                    text_align: TextAlign.start,
-                  ),
-                  const SizedBox(height: 20),
-                  CommonText(
-                    text: list_of_emotions.join(', '),
-                  ),
-                ],
+              CommonButton(
+                onTap: () {
+                  _showDialog(context);
+                },
+                text: 'Записаться к психологу',
+                pad_size: 0,
               ),
-            ),
-            CommonButton(
-              onTap: () {
-                _showDialog(context);
-              },
-              text: 'Записаться к психологу',
-              pad_size: 0,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -28,42 +28,44 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: pages[currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: Colors.white,
-        onTap: onTap,
-        currentIndex: currentIndex,
-        selectedItemColor: AppColors.primary_color,
-        unselectedItemColor: AppColors.grey_color,
-        items: const [
-          BottomNavigationBarItem(
-            label: "Тесты",
-            icon: ImageIcon(
-              AssetImage('assets/icons/tests_icon.png'),
+        body: pages[currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Colors.white,
+          onTap: onTap,
+          currentIndex: currentIndex,
+          selectedItemColor: AppColors.primary_color,
+          unselectedItemColor: AppColors.grey_color,
+          items: const [
+            BottomNavigationBarItem(
+              label: "Тесты",
+              icon: ImageIcon(
+                AssetImage('assets/icons/tests_icon.png'),
+              ),
             ),
-          ),
-          BottomNavigationBarItem(
-            label: "История",
-            icon: ImageIcon(
-              AssetImage('assets/icons/history_icon.png'),
+            BottomNavigationBarItem(
+              label: "История",
+              icon: ImageIcon(
+                AssetImage('assets/icons/history_icon.png'),
+              ),
             ),
-          ),
-          BottomNavigationBarItem(
-            label: "Ресурсы",
-            icon: ImageIcon(
-              AssetImage('assets/icons/resources_icon.png'),
+            BottomNavigationBarItem(
+              label: "Ресурсы",
+              icon: ImageIcon(
+                AssetImage('assets/icons/resources_icon.png'),
+              ),
             ),
-          ),
-          BottomNavigationBarItem(
-            label: "Профиль",
-            icon: ImageIcon(
-              AssetImage('assets/icons/profile_icon.png'),
+            BottomNavigationBarItem(
+              label: "Профиль",
+              icon: ImageIcon(
+                AssetImage('assets/icons/profile_icon.png'),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

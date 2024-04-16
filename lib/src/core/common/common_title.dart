@@ -8,6 +8,7 @@ class CommonTitle extends StatelessWidget {
   final TextStyle? textStyle;
   final TextAlign? text_align;
   final double? size;
+  final int? maxLines;
 
   const CommonTitle({
     super.key,
@@ -17,6 +18,7 @@ class CommonTitle extends StatelessWidget {
     this.textStyle,
     this.text_align = TextAlign.center,
     this.size = 22.0,
+    this.maxLines = 5,
   });
 
   @override
@@ -28,6 +30,8 @@ class CommonTitle extends StatelessWidget {
         fontSize: size,
         fontWeight: fontWeight,
       ),
+      overflow: TextOverflow.ellipsis,
+      maxLines: maxLines,
       textAlign: text_align,
       softWrap: true,
     );

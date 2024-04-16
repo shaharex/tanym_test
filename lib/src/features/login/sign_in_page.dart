@@ -43,72 +43,74 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.background_color,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_new_rounded,
-            color: AppColors.primary_color,
-            size: 32,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: AppColors.background_color,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_ios_new_rounded,
+              color: AppColors.primary_color,
+              size: 32,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
         ),
-      ),
-      backgroundColor: AppColors.background_color,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              Image.asset(
-                'assets/images/sign_in.png',
-                width: 303,
-              ),
-              const CommonTitle(
-                text: 'Войдите с помощью корпоративной электронной почты',
-                size: 19,
-              ),
-              const SizedBox(height: 25),
-              CommonTextField(
-                txtInpAct: TextInputAction.next,
-                controller: emailController,
-                hintText: 'Электронная почта',
-                obscureText: false,
-                keyboardType: TextInputType.emailAddress,
-              ),
-              const SizedBox(height: 15),
-              CommonTextField(
-                txtInpAct: TextInputAction.done,
-                controller: passwordController,
-                hintText: 'Пароль',
-                obscureText: obscurePassword,
-                keyboardType: TextInputType.visiblePassword,
-                suffixColor: suffixColor,
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      obscurePassword = !obscurePassword;
-                      if (obscurePassword) {
-                        iconPassword = Icons.remove_red_eye_rounded;
-                        suffixColor = AppColors.dark_grey_color;
-                      } else {
-                        iconPassword = Icons.remove_red_eye_rounded;
-                        suffixColor = AppColors.primary_color;
-                      }
-                    });
-                  },
-                  icon: Icon(iconPassword),
+        backgroundColor: AppColors.background_color,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                Image.asset(
+                  'assets/images/sign_in.png',
+                  width: 303,
                 ),
-              ),
-              const SizedBox(height: 25),
-              CommonButton(
-                onTap: signIn,
-                text: 'Войти',
-              ),
-            ],
+                const CommonTitle(
+                  text: 'Войдите с помощью корпоративной электронной почты',
+                  size: 19,
+                ),
+                const SizedBox(height: 25),
+                CommonTextField(
+                  txtInpAct: TextInputAction.next,
+                  controller: emailController,
+                  hintText: 'Электронная почта',
+                  obscureText: false,
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const SizedBox(height: 15),
+                CommonTextField(
+                  txtInpAct: TextInputAction.done,
+                  controller: passwordController,
+                  hintText: 'Пароль',
+                  obscureText: obscurePassword,
+                  keyboardType: TextInputType.visiblePassword,
+                  suffixColor: suffixColor,
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        obscurePassword = !obscurePassword;
+                        if (obscurePassword) {
+                          iconPassword = Icons.remove_red_eye_rounded;
+                          suffixColor = AppColors.dark_grey_color;
+                        } else {
+                          iconPassword = Icons.remove_red_eye_rounded;
+                          suffixColor = AppColors.primary_color;
+                        }
+                      });
+                    },
+                    icon: Icon(iconPassword),
+                  ),
+                ),
+                const SizedBox(height: 25),
+                CommonButton(
+                  onTap: signIn,
+                  text: 'Войти',
+                ),
+              ],
+            ),
           ),
         ),
       ),

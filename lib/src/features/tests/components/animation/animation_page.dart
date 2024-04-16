@@ -38,7 +38,8 @@ class AnimationPage extends StatelessWidget {
               Center(
                 child: CommonText(
                   text: data.text,
-                  size: 18,
+                  size: 17,
+                  maxLines: 5,
                   fontWeight: FontWeight.normal,
                   color: AppColors.dark_grey_color,
                 ),

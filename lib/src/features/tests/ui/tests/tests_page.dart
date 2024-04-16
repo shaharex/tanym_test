@@ -11,72 +11,74 @@ class TestsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background_color,
-      appBar: const CommonAppBar(
-        title: 'Тесты',
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Container(
-            height: 150,
-            width: double.maxFinite,
-            decoration: BoxDecoration(
-              color: AppColors.white_color,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              children: <Widget>[
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10.0),
-                    bottomLeft: Radius.circular(10.0),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: AppColors.background_color,
+        appBar: const CommonAppBar(
+          title: 'Тесты',
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Container(
+              height: 150,
+              width: double.maxFinite,
+              decoration: BoxDecoration(
+                color: AppColors.white_color,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                children: <Widget>[
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10.0),
+                      bottomLeft: Radius.circular(10.0),
+                    ),
+                    child: Image.asset(
+                      'assets/images/test_cover.png',
+                      height: double.infinity,
+                      fit: BoxFit.cover,
+                      width: 120,
+                    ),
                   ),
-                  child: Image.asset(
-                    'assets/images/test_cover.png',
-                    height: double.infinity,
-                    fit: BoxFit.cover,
-                    width: 120,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      const CommonTitle(
-                        text: 'Личный опросник ИСН',
-                        size: 20,
-                      ),
-                      const CommonText(
-                        text: '74 вопроса',
-                        size: 16,
-                        text_align: TextAlign.start,
-                      ),
-                      const CommonText(
-                        text: '06.04.2024 - срок сдачи',
-                        size: 16,
-                        text_align: TextAlign.start,
-                      ),
-                      CommonCustomBtn(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const MoodPage(),
-                            ),
-                          );
-                        },
-                        hor: 65,
-                        vert: 6,
-                        text: 'Сдать тест',
-                      ),
-                    ],
-                  ),
-                )
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        const CommonTitle(
+                          text: 'Личный опросник ИСН',
+                          size: 20,
+                        ),
+                        const CommonText(
+                          text: '74 вопроса',
+                          size: 16,
+                          text_align: TextAlign.start,
+                        ),
+                        const CommonText(
+                          text: '06.04.2024 - срок сдачи',
+                          size: 16,
+                          text_align: TextAlign.start,
+                        ),
+                        CommonCustomBtn(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MoodPage(),
+                              ),
+                            );
+                          },
+                          hor: 65,
+                          vert: 6,
+                          text: 'Сдать тест',
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
