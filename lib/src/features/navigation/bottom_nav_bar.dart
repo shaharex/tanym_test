@@ -3,7 +3,7 @@ import 'package:tanymtest_app/src/core/constants/app_colors.dart';
 import 'package:tanymtest_app/src/features/history/history_page.dart';
 import 'package:tanymtest_app/src/features/profile/profile_page.dart';
 import 'package:tanymtest_app/src/features/resources/resources_page.dart';
-import 'package:tanymtest_app/src/features/tests/ui/tests/tests_page.dart';
+import 'package:tanymtest_app/src/features/tests/ui/tests_page.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});

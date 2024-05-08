@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tanymtest_app/src/features/tests/components/animation/animation_page.dart';
 import 'package:tanymtest_app/src/features/tests/components/animation/data/animation_data.dart';
-import 'package:tanymtest_app/src/features/tests/models/question.dart';
-import 'package:tanymtest_app/src/features/tests/ui/result/test_result_page.dart';
+import 'package:tanymtest_app/src/features/tests/ui/quiz/models/question.dart';
+import 'package:tanymtest_app/src/features/tests/ui/quiz/test_result_page.dart';
 
 class QuizProvider extends ChangeNotifier {
   BuildContext context;
@@ -178,6 +178,11 @@ class QuizProvider extends ChangeNotifier {
     }
   }
 
+  void setCurrentIndex(int index) {
+    currentIndex = index;
+    notifyListeners(); // Уведомляем слушателей об изменении
+  }
+
   void nextQuestion() {
     if (currentIndex < questions.length - 1) {
       currentIndex++;
@@ -231,6 +236,7 @@ class QuizProvider extends ChangeNotifier {
       var existingData = await resultList.limit(1).get();
 
       DateTime now = DateTime.now();
+
       String formattedDate =
           "${now.day.toString().padLeft(2, '0')}.${now.month.toString().padLeft(2, '0')}.${now.year}";
 

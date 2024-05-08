@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tanymtest_app/src/core/constants/app_colors.dart';
 
 class ProfileAppBar extends StatelessWidget {
-  final String link;
+  final String? link;
 
-  const ProfileAppBar({super.key, required this.link});
+  const ProfileAppBar({super.key, this.link});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class ProfileAppBar extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         Container(
-          margin: EdgeInsets.only(bottom: bottom),
+          margin: const EdgeInsets.only(bottom: bottom),
           color: AppColors.primary_color,
           width: double.infinity,
           height: coverHeight,
@@ -28,7 +28,7 @@ class ProfileAppBar extends StatelessWidget {
           child: CircleAvatar(
             radius: profileHeight / 2,
             backgroundImage: NetworkImage(
-              link,
+              link!,
             ),
           ),
         ),

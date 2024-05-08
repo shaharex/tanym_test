@@ -6,8 +6,8 @@ import 'package:tanymtest_app/src/core/common/common_text.dart';
 import 'package:tanymtest_app/src/core/common/common_title.dart';
 import 'package:tanymtest_app/src/core/constants/app_colors.dart';
 import 'package:tanymtest_app/src/features/tests/components/progress_dot_widget.dart';
-import 'package:tanymtest_app/src/features/tests/models/question_tracker.dart';
-import 'package:tanymtest_app/src/features/tests/provider/test_provider.dart';
+import 'package:tanymtest_app/src/features/tests/ui/quiz/models/question_tracker.dart';
+import 'package:tanymtest_app/src/features/tests/ui/quiz/provider/test_provider.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key});
@@ -69,6 +69,9 @@ class _QuizPageState extends State<QuizPage> {
                             child: ProgressDotWidget(
                               status: provider.questions[index].status,
                               index: index + 1,
+                              onTap: () {
+                                provider.setCurrentIndex(index);
+                              },
                             ),
                           );
                         },

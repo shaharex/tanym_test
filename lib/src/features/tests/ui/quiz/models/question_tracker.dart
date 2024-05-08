@@ -1,5 +1,5 @@
-import 'package:tanymtest_app/src/features/tests/models/question.dart';
-import 'package:tanymtest_app/src/features/tests/models/question_status.dart';
+import 'package:tanymtest_app/src/features/tests/ui/quiz/models/question.dart';
+import 'package:tanymtest_app/src/features/tests/ui/quiz/models/question_status.dart';
 
 class QuestionTracker {
   List<Question> questions;

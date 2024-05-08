@@ -4,7 +4,7 @@ import 'package:tanymtest_app/src/core/common/common_button.dart';
 import 'package:tanymtest_app/src/core/common/common_text.dart';
 import 'package:tanymtest_app/src/core/common/common_title.dart';
 import 'package:tanymtest_app/src/core/constants/app_colors.dart';
-import 'package:tanymtest_app/src/features/tests/provider/test_provider.dart';
+import 'package:tanymtest_app/src/features/tests/ui/quiz/provider/test_provider.dart';
 import 'package:tanymtest_app/src/features/tests/ui/quiz/quiz_page.dart';
 
 class MoodPage extends StatefulWidget {
@@ -47,14 +47,16 @@ class _MoodPageState extends State<MoodPage> {
         ),
         selected: isSelectedList[index],
         onSelected: (bool value) {
-          setState(() {
-            isSelectedList[index] = value;
-            if (value) {
-              quizProvider.setSelectedEmotion(emotion);
-            } else {
-              quizProvider.removeSelectedEmotion(emotion);
-            }
-          });
+          setState(
+            () {
+              isSelectedList[index] = value;
+              if (value) {
+                quizProvider.setSelectedEmotion(emotion);
+              } else {
+                quizProvider.removeSelectedEmotion(emotion);
+              }
+            },
+          );
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),

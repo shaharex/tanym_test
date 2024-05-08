@@ -4,8 +4,8 @@ import 'package:tanymtest_app/src/core/common/common_button.dart';
 import 'package:tanymtest_app/src/core/common/common_text_field.dart';
 import 'package:tanymtest_app/src/core/common/common_title.dart';
 import 'package:tanymtest_app/src/core/constants/app_colors.dart';
+import 'package:tanymtest_app/src/features/login/provider/auth_service.dart';
 import 'package:tanymtest_app/src/features/navigation/bottom_nav_bar.dart';
-import 'package:tanymtest_app/src/services/auth_service/auth_service.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});

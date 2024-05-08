@@ -5,8 +5,10 @@ import 'package:tanymtest_app/src/core/components/profile_app_bar.dart';
 import 'package:tanymtest_app/src/core/components/profile_section.dart';
 import 'package:tanymtest_app/src/core/constants/app_colors.dart';
 import 'package:tanymtest_app/src/features/onboarding/onboarding_page.dart';
+import 'package:tanymtest_app/src/features/profile/edit_user_details/edit_user_details.dart';
+import 'package:tanymtest_app/src/features/profile/meet/psychologists_list.dart';
 
-import '../../services/auth_service/auth_service.dart';
+import '../login/provider/auth_service.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -32,7 +34,8 @@ class ProfilePage extends StatelessWidget {
         body: Column(
           children: [
             const ProfileAppBar(
-              link: 'dewnfonp',
+              link:
+                  'https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0=',
             ),
             const CommonTitle(
               text: 'Тест Тестилова',
@@ -44,27 +47,43 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 20),
-                  const ProfileSection(
+                  ProfileSection(
                     text: 'Изменить профиль',
-                    icon: Icon(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const EditUserDetails()));
+                    },
+                    icon: const Icon(
                       Icons.mode_edit_outline_outlined,
                       color: AppColors.primary_color,
                       size: 30,
                     ),
                   ),
                   const SizedBox(height: 10),
-                  const ProfileSection(
-                    text: 'Чат',
-                    icon: Icon(
-                      Icons.chat_bubble_outline_outlined,
-                      color: AppColors.primary_color,
-                      size: 30,
-                    ),
-                  ),
+                  //ProfileSection(
+                  //   text: 'Чат',
+                  //   onTap: () {
+                  //     Navigator.push(context,
+                  //         MaterialPageRoute(builder: (context) => ChatsPage()));
+                  //   },
+                  //   icon: const Icon(
+                  //     Icons.chat_bubble_outline_outlined,
+                  //     color: AppColors.primary_color,
+                  //     size: 30,
+                  //   ),
+                  // ),
                   const SizedBox(height: 10),
-                  const ProfileSection(
+                  ProfileSection(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PsychologistsList()));
+                    },
                     text: 'Встречи',
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.access_time,
                       color: AppColors.primary_color,
                       size: 30,

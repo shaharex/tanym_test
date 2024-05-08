@@ -7,6 +7,7 @@ class CommonTextField extends StatelessWidget {
   final bool obscureText;
   final VoidCallback? onTap;
   final FocusNode? focusNode;
+  final double? height;
   //final String? Function(String?)? onChanged;
   //final String? Function(String?)? validator;
   final TextInputType keyboardType;
@@ -28,13 +29,14 @@ class CommonTextField extends StatelessWidget {
     // this.errorMsg,
     this.suffixIcon,
     this.suffixColor,
+    this.height = 55,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width,
-      height: 55,
+      height: height,
       child: TextField(
         onTap: onTap,
         //  onChanged: onChanged,
@@ -60,7 +62,7 @@ class CommonTextField extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: AppColors.dark_grey_color),
+            borderSide: const BorderSide(color: AppColors.primary_color),
             borderRadius: BorderRadius.circular(5),
           ),
           //  errorText: errorMsg,

@@ -14,6 +14,7 @@ class ProfileSection extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        alignment: Alignment.center,
         width: double.maxFinite,
         decoration: BoxDecoration(
           color: AppColors.white_color,

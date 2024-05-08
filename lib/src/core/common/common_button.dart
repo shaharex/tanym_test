@@ -14,6 +14,8 @@ class CommonButton extends StatelessWidget {
   final bool? isCustom;
   final double? vert;
   final double? hor;
+  final double? borderRad;
+  final double? borderWidth;
 
   const CommonButton({
     super.key,
@@ -29,6 +31,8 @@ class CommonButton extends StatelessWidget {
     this.isCustom = false,
     this.hor,
     this.vert,
+    this.borderRad = 5,
+    this.borderWidth = 1,
   });
 
   @override
@@ -40,10 +44,10 @@ class CommonButton extends StatelessWidget {
         padding: EdgeInsets.all(padding!),
         decoration: BoxDecoration(
           color: background_color,
-          borderRadius: BorderRadius.circular(5),
+          borderRadius: BorderRadius.circular(borderRad!),
           border: Border.all(
             color: border_color,
-            width: 1,
+            width: borderWidth!,
           ),
         ),
         child: Center(
