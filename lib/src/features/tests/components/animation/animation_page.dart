@@ -47,7 +47,7 @@ class AnimationPage extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: CommonButton(
-                  onTap: () {
+                  onTap: () async {
                     Navigator.pop(context);
                   },
                   text: data.btn_text,

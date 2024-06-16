@@ -106,7 +106,7 @@ class _QuizPageState extends State<QuizPage> {
                               pad_size: 0,
                               onTap: provider.testSubmitted
                                   ? null
-                                  : () {
+                                  : () async {
                                       provider.answerQuestion('No');
                                     },
                               text: ('Нет'),
@@ -120,7 +120,7 @@ class _QuizPageState extends State<QuizPage> {
                             child: CommonButton(
                               onTap: provider.testSubmitted
                                   ? null
-                                  : () {
+                                  : () async {
                                       provider.answerQuestion('Yes');
                                     },
                               text: ('Да'),

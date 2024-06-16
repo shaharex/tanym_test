@@ -3,6 +3,7 @@ import 'package:tanymtest_app/src/core/common/common_button.dart';
 import 'package:tanymtest_app/src/core/common/common_text.dart';
 import 'package:tanymtest_app/src/core/common/common_title.dart';
 import 'package:tanymtest_app/src/core/constants/app_colors.dart';
+import 'package:tanymtest_app/src/features/profile/chat/chats_page.dart';
 import 'package:tanymtest_app/src/features/profile/meet/make_appointment/make_appointment.dart';
 import 'package:tanymtest_app/src/features/profile/meet/model/psychologist_model.dart';
 
@@ -73,7 +74,8 @@ class PsychologistsDetails extends StatelessWidget {
                       children: [
                         Expanded(
                           child: CommonButton(
-                              onTap: () {
+                              itMustbe: true,
+                              onTap: () async {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -102,7 +104,12 @@ class PsychologistsDetails extends StatelessWidget {
                               Icons.message_outlined,
                               color: AppColors.primary_color,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ChatsPage()));
+                            },
                           ),
                         ),
                       ],

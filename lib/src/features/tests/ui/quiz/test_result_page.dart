@@ -39,7 +39,7 @@ class TestResultPage extends StatelessWidget {
           ),
           actions: <Widget>[
             CommonButton(
-              onTap: () {
+              onTap: () async {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -175,7 +175,8 @@ class TestResultPage extends StatelessWidget {
               Column(
                 children: [
                   CommonButton(
-                    onTap: () {
+                    itMustbe: true,
+                    onTap: () async {
                       _showDialog(context);
                     },
                     text: 'Записаться к психологу',
@@ -186,8 +187,9 @@ class TestResultPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   CommonButton(
+                    itMustbe: true,
                     pad_size: 0,
-                    onTap: () {
+                    onTap: () async {
                       Navigator.push(
                           context,
                           MaterialPageRoute(

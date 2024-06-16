@@ -106,7 +106,10 @@ class _SignInPageState extends State<SignInPage> {
                 ),
                 const SizedBox(height: 25),
                 CommonButton(
-                  onTap: signIn,
+                  itMustbe: true,
+                  onTap: () async {
+                    signIn();
+                  },
                   text: 'Войти',
                 ),
               ],

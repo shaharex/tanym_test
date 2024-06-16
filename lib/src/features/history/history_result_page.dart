@@ -43,7 +43,8 @@ class HistoryResultPage extends StatelessWidget {
           ),
           actions: <Widget>[
             CommonButton(
-              onTap: () {
+              itMustbe: true,
+              onTap: () async {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -195,7 +196,8 @@ class HistoryResultPage extends StatelessWidget {
                 ),
               ),
               CommonButton(
-                onTap: () {
+                itMustbe: true,
+                onTap: () async {
                   _showDialog(context);
                 },
                 text: 'Записаться к психологу',

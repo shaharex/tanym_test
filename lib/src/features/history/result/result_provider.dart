@@ -10,24 +10,26 @@ class ResultProvider extends ChangeNotifier {
 
   List<ResultModel> results = [];
 
-  Future<void> getResults() async {
+  Stream<List<ResultModel>> getResults() {
     try {
-      QuerySnapshot snapshot = await _firestore
+      return _firestore
           .collection('users')
           .doc(studentId)
           .collection('result')
-          .get();
-
-      List<ResultModel> newResults = [];
-      for (var doc in snapshot.docs) {
-        newResults
-            .add(ResultModel.fromJson(doc.data() as Map<String, dynamic>));
-      }
-
-      results = newResults;
-      notifyListeners();
+          .snapshots()
+          .asyncMap((snapshot) async {
+        List<ResultModel> newResults = [];
+        for (var doc in snapshot.docs) {
+          var resultData = doc.data() as Map<String, dynamic>;
+          newResults.add(ResultModel.fromJson(resultData));
+        }
+        results = newResults;
+        notifyListeners();
+        return newResults; // Возвращаем список результатов
+      });
     } catch (e) {
       print('Ошибка при получении результатов: $e');
+      return Stream.value([]); // Возвращаем пустой список в случае ошибки
     }
   }
 }

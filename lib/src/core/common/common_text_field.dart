@@ -8,11 +8,8 @@ class CommonTextField extends StatelessWidget {
   final VoidCallback? onTap;
   final FocusNode? focusNode;
   final double? height;
-  //final String? Function(String?)? onChanged;
-  //final String? Function(String?)? validator;
   final TextInputType keyboardType;
   final TextInputAction? txtInpAct;
-  //final String? errorMsg;
   final Widget? suffixIcon;
   final Color? suffixColor;
   const CommonTextField({
@@ -21,12 +18,9 @@ class CommonTextField extends StatelessWidget {
     required this.controller,
     required this.hintText,
     required this.obscureText,
-    //this.onChanged,
-    //this.validator,
     this.onTap,
     this.txtInpAct,
     this.focusNode,
-    // this.errorMsg,
     this.suffixIcon,
     this.suffixColor,
     this.height = 55,

@@ -117,7 +117,8 @@ class _MoodPageState extends State<MoodPage> {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: CommonButton(
-                  onTap: () {
+                  itMustbe: true,
+                  onTap: () async {
                     provider.saveEmotionList();
                     Navigator.push(
                         context,

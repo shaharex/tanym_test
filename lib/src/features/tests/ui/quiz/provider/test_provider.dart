@@ -233,33 +233,20 @@ class QuizProvider extends ChangeNotifier {
 
       CollectionReference resultList =
           _fireStore.collection('users').doc(userId).collection('result');
-      var existingData = await resultList.limit(1).get();
 
       DateTime now = DateTime.now();
-
       String formattedDate =
           "${now.day.toString().padLeft(2, '0')}.${now.month.toString().padLeft(2, '0')}.${now.year}";
 
-      if (existingData.docs.isNotEmpty) {
-        var docId = existingData.docs.first.id;
-        await resultList.doc(docId).set({
-          'name_of_test': 'Личный опросник ИСН',
-          'data': formattedDate,
-          'depression': counter1,
-          'neuroticism': counter2,
-          'sincerity': counter3,
-          'sociability': counter4,
-        }, SetOptions(merge: true));
-      } else {
-        await resultList.add({
-          'name_of_test': 'Личный опросник ИСН',
-          'data': formattedDate,
-          'depression': counter1,
-          'neuroticism': counter2,
-          'sincerity': counter3,
-          'sociability': counter4,
-        });
-      }
+      await resultList.add({
+        'name_of_test': 'Личный опросник ИСН',
+        'data': formattedDate,
+        'depression': counter1,
+        'neuroticism': counter2,
+        'sincerity': counter3,
+        'sociability': counter4,
+        'list_of_emotions': _listOfEmotions,
+      });
     } catch (e) {
       print('Error submitting test: $e');
     }

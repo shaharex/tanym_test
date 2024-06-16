@@ -116,7 +116,7 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                     text_color: isTimeSelected[index]
                         ? AppColors.primary_color
                         : AppColors.grey_color,
-                    onTap: () {
+                    onTap: () async {
                       setState(() {
                         isTimeSelected[index] = !isTimeSelected[index];
                       });
@@ -126,7 +126,12 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                 },
               ),
             ),
-            CommonButton(onTap: () {}, text: 'Записаться'),
+            CommonButton(
+                itMustbe: true,
+                onTap: () async {
+                  Navigator.pop(context);
+                },
+                text: 'Записаться'),
           ],
         ),
       ),

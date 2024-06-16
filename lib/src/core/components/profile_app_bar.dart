@@ -9,7 +9,7 @@ class ProfileAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const double coverHeight = 180;
-    const double profileHeight = 140;
+    const double profileHeight = 120;
     const top = coverHeight - profileHeight / 2;
     const bottom = profileHeight / 2;
 
@@ -25,10 +25,15 @@ class ProfileAppBar extends StatelessWidget {
         ),
         Positioned(
           top: top,
-          child: CircleAvatar(
-            radius: profileHeight / 2,
-            backgroundImage: NetworkImage(
-              link!,
+          child: Container(
+            width: profileHeight,
+            height: profileHeight,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: NetworkImage(link!),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
