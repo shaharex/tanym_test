@@ -180,7 +180,7 @@ class QuizProvider extends ChangeNotifier {
 
   void setCurrentIndex(int index) {
     currentIndex = index;
-    notifyListeners(); // Уведомляем слушателей об изменении
+    notifyListeners();
   }
 
   void nextQuestion() {
@@ -214,6 +214,73 @@ class QuizProvider extends ChangeNotifier {
     }
   }
 
+  String determineZone(int dep, int neu, int sin, int soc) {
+    String sinZone;
+    if (sin >= 0 && sin <= 3) {
+      sinZone = "Красная";
+    } else if (sin >= 4 && sin <= 7) {
+      sinZone = "Желтая";
+    } else if (sin >= 8 && sin <= 10) {
+      sinZone = "Зеленая";
+    } else {
+      sinZone = "Недействительное значение";
+    }
+
+    String depZone;
+    if (dep >= 1 && dep <= 7) {
+      depZone = "Зеленая";
+    } else if (dep >= 8 && dep <= 16) {
+      depZone = "Желтая";
+    } else if (dep >= 17 && dep <= 21) {
+      depZone = "Красная";
+    } else {
+      depZone = "Недействительное значение";
+    }
+
+    String neuZone;
+    if (neu >= 1 && neu <= 7) {
+      neuZone = "Зеленая";
+    } else if (neu >= 8 && neu <= 16) {
+      neuZone = "Желтая";
+    } else if (neu >= 17 && neu <= 21) {
+      neuZone = "Красная";
+    } else {
+      neuZone = "Недействительное значение";
+    }
+
+    String socZone;
+    if (soc >= 1 && soc <= 7) {
+      socZone = "Красная";
+    } else if (soc >= 8 && soc <= 16) {
+      socZone = "Желтая";
+    } else if (soc >= 17 && soc <= 21) {
+      socZone = "Зеленая";
+    } else {
+      socZone = "Недействительное значение";
+    }
+
+    if (sinZone == "Красная" ||
+        depZone == "Красная" ||
+        neuZone == "Красная" ||
+        socZone == "Красная") {
+      return "red";
+    }
+    if (sinZone == "Желтая" ||
+        depZone == "Желтая" ||
+        neuZone == "Желтая" ||
+        socZone == "Желтая") {
+      return "yellow";
+    }
+    if (sinZone == "Зеленая" &&
+        depZone == "Зеленая" &&
+        neuZone == "Зеленая" &&
+        socZone == "Зеленая") {
+      return "green";
+    }
+
+    return "Данные вне допустимых диапазонов";
+  }
+
   void submitTest() async {
     try {
       String userId = await getUserId();
@@ -231,21 +298,25 @@ class QuizProvider extends ChangeNotifier {
         ),
       );
 
-      CollectionReference resultList =
-          _fireStore.collection('users').doc(userId).collection('result');
-
       DateTime now = DateTime.now();
-      String formattedDate =
-          "${now.day.toString().padLeft(2, '0')}.${now.month.toString().padLeft(2, '0')}.${now.year}";
+      String formattedDateTime =
+          "${now.day.toString().padLeft(2, '0')}.${now.month.toString().padLeft(2, '0')}.${now.year}_${now.hour.toString().padLeft(2, '0')}.${now.minute.toString().padLeft(2, '0')}";
 
-      await resultList.add({
+      DocumentReference resultDocument = _fireStore
+          .collection('users')
+          .doc(userId)
+          .collection('result')
+          .doc(formattedDateTime);
+
+      await resultDocument.set({
         'name_of_test': 'Личный опросник ИСН',
-        'data': formattedDate,
+        'data': formattedDateTime,
         'depression': counter1,
         'neuroticism': counter2,
         'sincerity': counter3,
         'sociability': counter4,
         'list_of_emotions': _listOfEmotions,
+        'zone': determineZone(counter1, counter2, counter3, counter4)
       });
     } catch (e) {
       print('Error submitting test: $e');
