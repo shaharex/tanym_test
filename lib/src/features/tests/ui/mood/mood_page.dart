@@ -88,47 +88,44 @@ class _MoodPageState extends State<MoodPage> {
             },
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              const Center(
-                child: CommonTitle(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                const CommonTitle(
                   text: 'Как вы себя чувствуете?',
                   size: 32,
                   fontWeight: FontWeight.bold,
                 ),
-              ),
-              Center(
-                child: Image.asset(
+                Image.asset(
                   'assets/images/mood_page.png',
                   height: 270,
                 ),
-              ),
-              Center(
-                child: Wrap(
+                Wrap(
                   alignment: WrapAlignment.center,
                   spacing: 3.0,
                   runSpacing: 0.0,
                   children: _buildFilterChips(provider, context),
                 ),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: CommonButton(
-                  itMustbe: true,
-                  onTap: () async {
-                    provider.saveEmotionList();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const QuizPage()));
-                  },
-                  text: 'Готово',
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: CommonButton(
+                    itMustbe: true,
+                    onTap: () async {
+                      provider.saveEmotionList();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const QuizPage()));
+                    },
+                    text: 'Готово',
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

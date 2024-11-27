@@ -11,14 +11,14 @@ class PodcastsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<List<Map<String, dynamic>>> _getResultData() async {
+    Future<List<Map<String, dynamic>>> getResultData() async {
       var resultCollection = FirebaseFirestore.instance.collection('podcasts');
       var querySnapshot = await resultCollection.get();
       return querySnapshot.docs.map((doc) => doc.data()).toList();
     }
 
     return FutureBuilder(
-        future: _getResultData(),
+        future: getResultData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -67,6 +67,38 @@ class PodcastsScreen extends StatelessWidget {
                             width: double.maxFinite,
                             height: 170,
                             fit: BoxFit.cover,
+                            loadingBuilder: (context, child, loadingProgress) {
+                              if (loadingProgress == null) {
+                                return child;
+                              }
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  color: AppColors.primary_color,
+                                  value: loadingProgress.expectedTotalBytes !=
+                                          null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes!
+                                      : null,
+                                ),
+                              );
+                            },
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                alignment: Alignment.center,
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      height: 130,
+                                      "assets/images/empty.png",
+                                      fit: BoxFit.fitHeight,
+                                    ),
+                                    const Text(
+                                      "Error loading image",
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
                           ),
                         ),
                         CommonTitle(

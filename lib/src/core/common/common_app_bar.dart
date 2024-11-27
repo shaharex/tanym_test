@@ -13,7 +13,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     this.onTap,
     this.icon,
-    this.height = 90,
+    this.height = 80,
     this.text_color = AppColors.white_color,
     this.background_color = AppColors.primary_color,
   });

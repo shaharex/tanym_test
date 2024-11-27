@@ -13,7 +13,6 @@ class ChatsPage extends StatefulWidget {
 }
 
 class _ChatsPageState extends State<ChatsPage> {
-  //instance of auth
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
@@ -54,7 +53,7 @@ class _ChatsPageState extends State<ChatsPage> {
           return const Text('error');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return const Center(child: CircularProgressIndicator());
         }
         return ListView(
           children: snapshot.data!.docs
@@ -88,11 +87,28 @@ class _ChatsPageState extends State<ChatsPage> {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
-                  child: Image.asset(
+                  child: Image.network(
                     data['image'],
                     fit: BoxFit.cover,
                     height: 65,
                     width: 70,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        alignment: Alignment.center,
+                        child: Column(
+                          children: [
+                            Image.asset(
+                              height: 130,
+                              "assets/images/empty.png",
+                              fit: BoxFit.fitHeight,
+                            ),
+                            const Text(
+                              "Error loading image",
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(width: 16),

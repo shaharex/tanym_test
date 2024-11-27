@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tanymtest_app/src/core/common/common_app_bar.dart';
 import 'package:tanymtest_app/src/core/common/common_title.dart';
-import 'package:tanymtest_app/src/core/components/profile_app_bar.dart';
 import 'package:tanymtest_app/src/core/components/profile_section.dart';
 import 'package:tanymtest_app/src/core/constants/app_colors.dart';
 import 'package:tanymtest_app/src/features/onboarding/onboarding_page.dart';
@@ -38,7 +38,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    //sign out function
     void signOut() {
       final authService = Provider.of<AuthService>(context, listen: false);
       authService.signOut().then((_) {
@@ -58,95 +57,99 @@ class _ProfilePageState extends State<ProfilePage> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.background_color,
+        appBar: const CommonAppBar(title: "Профиль"),
         body: StreamBuilder<UserModel>(
-            stream: _userStream,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Ошибка: ${snapshot.error}'));
-              } else if (!snapshot.hasData || snapshot.data == null) {
-                return const Center(child: Text('Пользователь не найден'));
-              } else {
-                final user = snapshot.data!;
-                return Column(
+          stream: _userStream,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Ошибка: ${snapshot.error}'));
+            } else if (!snapshot.hasData || snapshot.data == null) {
+              return const Center(child: Text('Пользователь не найден'));
+            } else {
+              final user = snapshot.data!;
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
                   children: [
-                    ProfileAppBar(
-                      link: user.imageUrl,
+                    const SizedBox(height: 20),
+                    CircleAvatar(
+                      radius: 30,
+                      child: Image.asset("assets/images/go_ahead3.png"),
                     ),
                     CommonTitle(
                       text: user.name,
                       color: AppColors.black_color,
                       fontWeight: FontWeight.normal,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 20),
-                          ProfileSection(
-                            text: 'Изменить профиль',
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          EditUserDetails(userDetails: user)));
-                            },
-                            icon: const Icon(
-                              Icons.mode_edit_outline_outlined,
-                              color: AppColors.primary_color,
-                              size: 30,
-                            ),
+                    Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        ProfileSection(
+                          text: 'Изменить профиль',
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        EditUserDetails(userDetails: user)));
+                          },
+                          icon: const Icon(
+                            Icons.mode_edit_outline_outlined,
+                            color: AppColors.primary_color,
+                            size: 30,
                           ),
-                          const SizedBox(height: 10),
-                          ProfileSection(
-                            text: 'Чат',
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ChatsPage()));
-                            },
-                            icon: const Icon(
-                              Icons.chat_bubble_outline_outlined,
-                              color: AppColors.primary_color,
-                              size: 30,
-                            ),
+                        ),
+                        const SizedBox(height: 10),
+                        ProfileSection(
+                          text: 'Чат',
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ChatsPage()));
+                          },
+                          icon: const Icon(
+                            Icons.chat_bubble_outline_outlined,
+                            color: AppColors.primary_color,
+                            size: 30,
                           ),
-                          const SizedBox(height: 10),
-                          ProfileSection(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const PsychologistsList()));
-                            },
-                            text: 'Встречи',
-                            icon: const Icon(
-                              Icons.access_time,
-                              color: AppColors.primary_color,
-                              size: 30,
-                            ),
+                        ),
+                        const SizedBox(height: 10),
+                        ProfileSection(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PsychologistsList()));
+                          },
+                          text: 'Встречи',
+                          icon: const Icon(
+                            Icons.access_time,
+                            color: AppColors.primary_color,
+                            size: 30,
                           ),
-                          const SizedBox(height: 10),
-                          ProfileSection(
-                            onTap: signOut,
-                            text: 'Выйти',
-                            icon: const Icon(
-                              Icons.logout_outlined,
-                              color: AppColors.primary_color,
-                              size: 30,
-                            ),
+                        ),
+                        const SizedBox(height: 10),
+                        ProfileSection(
+                          onTap: signOut,
+                          text: 'Выйти',
+                          icon: const Icon(
+                            Icons.logout_outlined,
+                            color: AppColors.primary_color,
+                            size: 30,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
-                );
-              }
-            }),
+                ),
+              );
+            }
+          },
+        ),
       ),
     );
   }

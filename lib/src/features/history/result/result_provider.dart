@@ -25,11 +25,11 @@ class ResultProvider extends ChangeNotifier {
         }
         results = newResults;
         notifyListeners();
-        return newResults; // Возвращаем список результатов
+        return newResults;
       });
     } catch (e) {
-      print('Ошибка при получении результатов: $e');
-      return Stream.value([]); // Возвращаем пустой список в случае ошибки
+      debugPrint('Ошибка при получении результатов: $e');
+      return Stream.value([]);
     }
   }
 }

@@ -82,7 +82,7 @@ class _CommonButtonState extends State<CommonButton> {
               ? const SizedBox(
                   height: 20,
                   width: 20,
-                  child: const CircularProgressIndicator(
+                  child: CircularProgressIndicator(
                     color: AppColors.white_color,
                     strokeWidth: 2,
                   ),

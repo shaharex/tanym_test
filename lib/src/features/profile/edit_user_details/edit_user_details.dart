@@ -12,6 +12,8 @@ import 'package:tanymtest_app/src/core/common/common_text_box.dart';
 import 'package:tanymtest_app/src/core/constants/app_colors.dart';
 import 'package:tanymtest_app/src/features/profile/edit_user_details/user/model/user_model.dart';
 
+import '../../../core/common/common_text_field.dart';
+
 class EditUserDetails extends StatefulWidget {
   final UserModel userDetails;
   const EditUserDetails({super.key, required this.userDetails});
@@ -74,7 +76,7 @@ class _EditUserDetailsState extends State<EditUserDetails> {
     }
   }
 
-  // final TextEditingController nameController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   // final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -129,8 +131,8 @@ class _EditUserDetailsState extends State<EditUserDetails> {
                 CommonTextBox(text: widget.userDetails.email),
                 // CommonTextField(
                 //   keyboardType: TextInputType.name,
-                //   controller: passwordController,
-                //   //   controller: ,
+                //   controller: emailController,
+                //   controller: ,
                 //   hintText: 'Введите почту',
                 //   obscureText: false,
                 // ),
@@ -140,13 +142,12 @@ class _EditUserDetailsState extends State<EditUserDetails> {
                   text: 'Имя, фамилия',
                   color: AppColors.dark_grey_color,
                 ),
-                CommonTextBox(text: widget.userDetails.name),
-                // CommonTextField(
-                //   keyboardType: TextInputType.name,
-                //   controller: nameController,
-                //   hintText: 'Введите имя',
-                //   obscureText: false,
-                // ),
+                CommonTextField(
+                  keyboardType: TextInputType.name,
+                  controller: nameController,
+                  hintText: widget.userDetails.name,
+                  obscureText: false,
+                ),
                 const SizedBox(height: 10),
                 // const CommonText(
                 //   size: 15,

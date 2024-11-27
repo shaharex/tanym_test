@@ -32,6 +32,7 @@ class CommonCustomBtn extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        alignment: Alignment.center,
         margin: EdgeInsets.symmetric(vertical: pad_size),
         padding: EdgeInsets.symmetric(vertical: vert!, horizontal: hor!),
         decoration: BoxDecoration(

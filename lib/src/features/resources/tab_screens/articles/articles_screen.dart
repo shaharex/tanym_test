@@ -10,20 +10,21 @@ class ArticlesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<List<Map<String, dynamic>>> _getResultData() async {
+    Future<List<Map<String, dynamic>>> getResultData() async {
       var resultCollection = FirebaseFirestore.instance.collection('articles');
       var querySnapshot = await resultCollection.get();
       return querySnapshot.docs.map((doc) => doc.data()).toList();
     }
 
     return FutureBuilder<List<Map<String, dynamic>>>(
-      future: _getResultData(),
+      future: getResultData(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-              child: CircularProgressIndicator(
-            color: AppColors.primary_color,
-          ));
+            child: CircularProgressIndicator(
+              color: AppColors.primary_color,
+            ),
+          );
         }
         if (snapshot.hasError) {
           return Center(child: Text('Ошибка: ${snapshot.error}'));
@@ -74,6 +75,23 @@ class ArticlesScreen extends StatelessWidget {
                                     fit: BoxFit.cover,
                                     height: 150,
                                     width: double.infinity,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Container(
+                                        alignment: Alignment.center,
+                                        child: Column(
+                                          children: [
+                                            Image.asset(
+                                              height: 130,
+                                              "assets/images/empty.png",
+                                              fit: BoxFit.fitHeight,
+                                            ),
+                                            const Text(
+                                              "Error loading image",
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                                 CommonTitle(

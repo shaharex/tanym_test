@@ -15,110 +15,110 @@ class PsychologistsDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(5),
-                        bottomRight: Radius.circular(5)),
-                    child: Image.asset(
-                      height: 340,
-                      psychologist.image,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: IconButton(
-                      color: AppColors.white_color,
-                      icon: const Icon(
-                        Icons.arrow_back_ios_new_rounded,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  )
-                ],
+        body: Column(
+          children: [
+            Container(
+              height: 340,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(5),
+                    bottomRight: Radius.circular(5)),
+                image: DecorationImage(
+                  image: AssetImage(psychologist.image),
+                  fit: BoxFit.cover,
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CommonTitle(
-                      text: psychologist.name,
-                      fontWeight: FontWeight.w500,
-                      size: 26,
-                    ),
-                    CommonText(
-                      text: psychologist.gov_institution,
-                      text_align: TextAlign.start,
-                      color: AppColors.low_black_color,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    const SizedBox(height: 15),
-                    CommonText(
-                      text: psychologist.description,
-                      text_align: TextAlign.start,
-                      color: AppColors.low_black_color,
-                      maxLines: 40,
-                    ),
-                    const SizedBox(height: 20),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CommonButton(
-                              itMustbe: true,
-                              onTap: () async {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const MakeAppointment()));
-                              },
-                              text: 'Назначить встречу'),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5.0),
-                            border: Border.all(
-                              color: AppColors.primary_color,
-                              width: 2.0,
-                            ),
-                          ),
-                          height: 50,
-                          width: 60,
-                          child: IconButton(
-                            icon: const Icon(
-                              size: 32,
-                              Icons.message_outlined,
-                              color: AppColors.primary_color,
-                            ),
-                            onPressed: () {
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: IconButton(
+                  color: AppColors.white_color,
+                  icon: const Icon(
+                    Icons.arrow_back_ios_new_rounded,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CommonTitle(
+                        text: psychologist.name,
+                        fontWeight: FontWeight.w500,
+                        size: 26,
+                      ),
+                      CommonText(
+                        text: psychologist.gov_institution,
+                        text_align: TextAlign.start,
+                        color: AppColors.low_black_color,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      const SizedBox(height: 15),
+                      CommonText(
+                        text: psychologist.description,
+                        text_align: TextAlign.start,
+                        color: AppColors.low_black_color,
+                        maxLines: 40,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CommonButton(
+                            itMustbe: true,
+                            onTap: () async {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ChatsPage()));
+                                      builder: (context) =>
+                                          const MakeAppointment()));
                             },
+                            text: 'Назначить встречу'),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                          border: Border.all(
+                            color: AppColors.primary_color,
+                            width: 2.0,
                           ),
                         ),
-                      ],
-                    )
-                  ],
-                ),
+                        height: 50,
+                        width: 60,
+                        child: IconButton(
+                          icon: const Icon(
+                            size: 32,
+                            Icons.message_outlined,
+                            color: AppColors.primary_color,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ChatsPage()));
+                          },
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

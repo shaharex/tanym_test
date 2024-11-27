@@ -74,19 +74,20 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 ),
               ),
               CommonButton(
-                  onTap: () async {
-                    setState(() {
-                      if (currentIndex != data.items.length - 1) {
-                        currentIndex++;
-                      } else {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => const WelcomePage()),
-                        );
-                      }
-                    });
-                  },
-                  text: 'Дальше'),
+                onTap: () async {
+                  setState(() {
+                    if (currentIndex != data.items.length - 1) {
+                      currentIndex++;
+                    } else {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => const WelcomePage()),
+                      );
+                    }
+                  });
+                },
+                text: 'Дальше',
+              ),
             ],
           ),
         ),
