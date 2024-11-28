@@ -27,7 +27,8 @@ class UserProvider extends ChangeNotifier {
           .map((snapshot) => UserModel.fromJson(snapshot.data() ?? {}));
     } catch (e) {
       print('Ошибка при получении результатов: $e');
-      return Stream.value(UserModel(
+      return Stream.value(
+        UserModel(
           uid: '',
           name: 'Ошибка',
           email: '',
@@ -36,7 +37,9 @@ class UserProvider extends ChangeNotifier {
           gender: '',
           password: '',
           school_id: '',
-          group_id: ''));
+          group_id: '',
+        ),
+      );
     }
   }
 }

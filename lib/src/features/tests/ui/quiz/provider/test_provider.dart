@@ -102,6 +102,7 @@ class QuizProvider extends ChangeNotifier {
     Question('Н',
         "У меня бывают периоды, когда меня сильно раздражают яркий свет, яркие краски, сильный шум, хотя на других людей это так не действует"),
     Question('И', "У меня есть плохие привычки"),
+    Question('И', "У меня есть плохие привычки"),
   ];
   int counter1 = 0;
   int counter2 = 0;
@@ -169,9 +170,9 @@ class QuizProvider extends ChangeNotifier {
           'list_of_emotions': _listOfEmotions,
         }, SetOptions(merge: true));
       } else {
-        await emotionList.add({
-          'list_of_emotions': _listOfEmotions,
-        });
+        // await emotionList.add({
+        //   'list_of_emotions': _listOfEmotions,
+        // });
       }
     } catch (e) {
       print('Error submitting test: $e');
@@ -300,7 +301,7 @@ class QuizProvider extends ChangeNotifier {
 
       DateTime now = DateTime.now();
       String formattedDateTime =
-          "${now.day.toString().padLeft(2, '0')}.${now.month.toString().padLeft(2, '0')}.${now.year}_${now.hour.toString().padLeft(2, '0')}.${now.minute.toString().padLeft(2, '0')}";
+          "${now.day.toString().padLeft(2, '0')}.${now.month.toString().padLeft(2, '0')}.${now.year} ${now.hour.toString().padLeft(2, '0')}:${now.minute.toString().padLeft(2, '0')}";
 
       DocumentReference resultDocument = _fireStore
           .collection('users')

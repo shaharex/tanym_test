@@ -46,6 +46,7 @@ class CommonCustomBtn extends StatelessWidget {
         child: Center(
           child: Text(
             text,
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(
               fontSize: fntSize,
               color: text_color,

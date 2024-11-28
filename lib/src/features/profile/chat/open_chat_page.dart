@@ -31,8 +31,6 @@ class _OpenChatPageState extends State<OpenChatPage> {
     if (_messageController.text.isNotEmpty) {
       await _chatService.sendMessage(
           widget.receiverUserID, _messageController.text);
-      //clear the controller after sending message
-      _messageController.clear();
     }
   }
 
@@ -195,7 +193,10 @@ class _OpenChatPageState extends State<OpenChatPage> {
                 ),
               ),
               IconButton(
-                onPressed: sendMessage,
+                onPressed: () {
+                  sendMessage();
+                  _messageController.clear();
+                },
                 icon: const Icon(
                   Icons.send,
                   size: 35,

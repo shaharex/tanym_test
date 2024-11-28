@@ -116,10 +116,14 @@ class _MoodPageState extends State<MoodPage> {
                     itMustbe: true,
                     onTap: () async {
                       provider.saveEmotionList();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const QuizPage()));
+                      isSelectedList.contains(true)
+                          ? Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const QuizPage()))
+                          : ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text("Выберите что-то из списка")));
                     },
                     text: 'Готово',
                   ),

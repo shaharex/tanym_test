@@ -87,9 +87,6 @@ class _MakeAppointmentState extends State<MakeAppointment> {
                   shape: BoxShape.circle,
                 ),
               ),
-              // eventLoader: (day) {
-              //   //  return _getEventsForDay(day);
-              // },
             ),
             Expanded(
               child: GridView.builder(

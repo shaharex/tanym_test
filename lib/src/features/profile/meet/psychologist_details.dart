@@ -15,110 +15,117 @@ class PsychologistsDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            Container(
-              height: 340,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(5),
-                    bottomRight: Radius.circular(5)),
-                image: DecorationImage(
-                  image: AssetImage(psychologist.image),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: IconButton(
-                  color: AppColors.white_color,
-                  icon: const Icon(
-                    Icons.arrow_back_ios_new_rounded,
+        body: Center(
+          child: Column(
+            children: [
+              Container(
+                height: 340,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(5),
+                      bottomRight: Radius.circular(5)),
+                  image: DecorationImage(
+                    image: AssetImage(psychologist.image),
+                    fit: BoxFit.cover,
                   ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+                ),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    color: AppColors.white_color,
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      CommonTitle(
-                        text: psychologist.name,
-                        fontWeight: FontWeight.w500,
-                        size: 26,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CommonTitle(
+                            text: psychologist.name,
+                            fontWeight: FontWeight.w600,
+                            size: 28,
+                          ),
+                          CommonText(
+                            text: psychologist.gov_institution,
+                            text_align: TextAlign.start,
+                            color: AppColors.low_black_color,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          CommonText(
+                            text: psychologist.description,
+                            text_align: TextAlign.start,
+                            color: AppColors.low_black_color,
+                            maxLines: 40,
+                          ),
+                        ],
                       ),
-                      CommonText(
-                        text: psychologist.gov_institution,
-                        text_align: TextAlign.start,
-                        color: AppColors.low_black_color,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      const SizedBox(height: 15),
-                      CommonText(
-                        text: psychologist.description,
-                        text_align: TextAlign.start,
-                        color: AppColors.low_black_color,
-                        maxLines: 40,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CommonButton(
-                            itMustbe: true,
-                            onTap: () async {
-                              Navigator.push(
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Expanded(
+                            child: CommonButton(
+                              itMustbe: true,
+                              onTap: () async {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MakeAppointment()));
+                              },
+                              text: 'Назначить встречу',
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.0),
+                              border: Border.all(
+                                color: AppColors.primary_color,
+                                width: 2.0,
+                              ),
+                            ),
+                            height: 50,
+                            width: 60,
+                            child: IconButton(
+                              icon: const Icon(
+                                size: 32,
+                                Icons.message_outlined,
+                                color: AppColors.primary_color,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const MakeAppointment()));
-                            },
-                            text: 'Назначить встречу'),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.0),
-                          border: Border.all(
-                            color: AppColors.primary_color,
-                            width: 2.0,
+                                    builder: (context) => ChatsPage(),
+                                  ),
+                                );
+                              },
+                            ),
                           ),
-                        ),
-                        height: 50,
-                        width: 60,
-                        child: IconButton(
-                          icon: const Icon(
-                            size: 32,
-                            Icons.message_outlined,
-                            color: AppColors.primary_color,
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ChatsPage()));
-                          },
-                        ),
-                      ),
+                        ],
+                      )
                     ],
-                  )
-                ],
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

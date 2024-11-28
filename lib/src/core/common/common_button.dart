@@ -52,7 +52,7 @@ class _CommonButtonState extends State<CommonButton> {
             _isLoading = true;
           });
 
-          await Future.delayed(Duration(milliseconds: 500));
+          await Future.delayed(const Duration(milliseconds: 500));
 
           await widget.onTap?.call();
 
